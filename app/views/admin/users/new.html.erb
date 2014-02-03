@@ -1,0 +1,43 @@
+<div class="page-title">
+    <div class="row">
+        <div class="contact-form span3"></div>
+        <div class=" contact-us contact-form login-form span7">
+            <h2>Registro de nuevo usuario</h2>
+            <hr/>
+            <%= form_for [:admin, @user] do |f| %>
+                  <div class="name">
+                    <%= f.label :first_name, 'Nombre*' %>
+                    <%= f.text_field :first_name, :placeholder => 'Ingrese su nombre...' %>
+                  </div>
+                  <div class="name">
+                    <%= f.label :last_name, 'Apellido*' %>
+                    <%= f.text_field :last_name, :placeholder => 'Ingrese su apellido...' %>
+                  </div>
+                  <div class="name">
+                    <%= f.label :email, 'Correo electrónico*' %>
+                    <%= f.text_field :email, :placeholder => 'Ingrese su correo...', :autocomplete => "off" %>
+                  </div>
+                  <div class="name">
+                    <%= f.label :password, 'Contraseña*', :class => 'nameLabel' %>
+                    <%= f.password_field :password, :placeholder => 'Ingrese su contraseña...' %>
+                  </div>
+                  <div class="name">
+                    <%= f.label :password_confirmation, 'Confirmar contraseña*', :class => 'nameLabel' %>
+                    <%= f.password_field :password_confirmation, :placeholder => 'Repita su contraseña...' %>
+                  </div>
+                  <div class="name">
+                    <%= f.label :phone, 'Teléfono*' %>
+                    <%= f.text_field :phone, :placeholder => 'Ingrese su número de teléfono...', :autocomplete => "off" %>
+                  </div>
+                  <div class="name">
+                    <%= f.label :chapel_id, 'Capilla*' %>
+                    <%= f.collection_select :chapel_id, Chapel.all, :id, :name %>
+                  </div>
+                <br/>
+                <p>*Dato obligatorio</p><br/>
+                <button type="submit" name="create">Registrar</button>
+                <button type="submit" name="cancel">Cancelar</button>
+            <% end %>
+        </div>
+    </div>
+</div>

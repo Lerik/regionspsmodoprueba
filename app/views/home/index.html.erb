@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Region SPS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Centro de información SUD para líderes del noroccidente de Honduras.">
+  <meta name="author" content="">
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Sans">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster">
+</head>
+<body>
+	<div class="container">
+        <div class="header row">
+            <div class="span12">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <h1>
+                            <a class="brand" href="/">Región SPS - Honduras</a>
+                        </h1>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right">
+                                <li class="current-page">
+                                    <a href="/"><i class="icon-home"></i><br />Inicio</a>
+                                </li>
+                                <li>
+                                    <a href="recursos"><i class="icon-folder-open"></i><br />Recursos</a>
+                                </li>
+                                
+                                <% unless current_user.nil? %>
+                                <li>
+                                    <a href="events"><i class="icon-calendar"></i><br />Eventos</a>
+                                </li>
+                                <li>
+                                    <a href="/dashboard"><i class="icon-inbox"></i><br />Dashboard</a>
+                                </li>
+                                <% end %>                                
+                                <li>
+                                    <a href="nosotros"><i class="icon-fire"></i><br />Nosotros</a>
+                                </li>                                
+                                <li>
+                                    <a href="admin"><i class="icon-signin"></i><br />Administrar</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slider">
+        <div class="container">
+            <div class="row">
+                <div class="span10 offset1">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <li data-thumb="assets/galery/preparing-future-missionaries-Lvl1.jpg">
+                                <a href="/articulos/articulo1.pdf" target="_blank">
+                                    <img src="assets/galery/preparing-future-missionaries-Lvl1.jpg">
+                                </a>
+                                <p class="flex-caption">Mejorando la enseñanza del Evangelio en nuestros hogares y reuniones de la Iglesia a traves del uso de "Ven, sigueme".<a class="articulo" style="text-width: bold" href="/articulos/articulo1.pdf" target="_blank"> [Ver Articulo]</a></p>
+                            </li>
+                            <li data-thumb="assets/galery/priesthood-and-priesthood-keys-lvl-1.jpg">
+                                <a href="/articulos/articulo2.pdf" target="_blank">
+                                    <img src="assets/galery/priesthood-and-priesthood-keys-lvl-1.jpg">
+                                </a>
+                                <p class="flex-caption ca-button">Usando el Plan del Área como nuestra guia y visión de como lograr "Crecimiento Verdadero" en nuestras familias y unidades.<a class="articulo" style="text-width: bold" href="/articulos/articulo2.pdf" target="_blank"> [Ver Articulo]</a></p>
+                            </li>
+                            <li data-thumb="assets/galery/outside-temple.jpg">
+                                <a href="/articulos/articulo3.pdf" target="_blank">
+                                    <img src="assets/galery/outside-temple.jpg">
+                                </a>
+                                <p class="flex-caption">Buscando un equilibrio en nuestro liderazgo al "alinear las llaves del Sacerdocio" en nuestras unidades y en nuestro hogar.<a  class="articulo" style="text-width: bold" href="/articulos/articulo3.pdf" target="_blank"> [Ver Articulo]</a></p>
+                            </li>
+                            <li data-thumb="assets/galery/family.jpg">
+                                <a href="/articulos/articulo4.pdf" target="_inline">
+                                    <img src="assets/galery/family.jpg">
+                                </a>
+                                <p class="flex-caption">Fortaleciendo los matrimonios y las familias mediante el abandono de tradiciones falsas y el establecimiento de tradiciones celestiales.<a class="articulo" style="text-width: bold" href="/articulos/articulo4.pdf" target="_blank"><br/>[Ver Articulo]</a></p>
+                            </li>
+                            <li data-thumb="assets/galery/thanks-be-to-god.jpg">
+                                <a href="/articulos/articulo5.pdf" target="_blank">
+                                    <img src="assets/galery/thanks-be-to-god.jpg">
+                                </a>
+                                <p class="flex-caption">Fomentando la búsqueda y el uso de la inspiración por parte de nuestros lideres y familias a traves del uso de "consejos".<a class="articulo" style="text-width: bold" href="/articulos/articulo5.pdf" target="_blank"> [Ver Articulo]</a></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="testimonials container">
+        <div class="testimonials-title">
+            <h3 style="width: 27%;">Actividades y Reuniones</h3>
+        </div>
+        <div class="row">
+            <div class="testimonial-list">
+                <% if @events.any? %>
+                <div class="tabbable tabs-below">
+                    <div class="tab-content">
+                        <% @events.each_with_index do |e, i|%>
+                        <div class="tab-pane <% if i == 0 %>active<%end %>" id="<%= e.id %>">                            
+                            <p style="padding-left: 10%">
+                                <strong><%= e.name %></strong>
+                                <br/>
+                                <%= e.description %>
+                                <br />
+                                <span class="violet">Lugar: </span><%= e.place %>
+                                <br />
+                                <span class="violet">Fecha y hora: </span><%= l e.celebrated_at, :format => :long %>
+                            </p>
+                        </div>
+                        <% end %>                  
+                    </div>
+
+                   <ul class="nav nav-tabs" style="width: 20%">
+                    <% @events.each_with_index do |e, i| %>
+                    <li class="<% if i == 0 %>active<% end %>"><a href="#<%= e.id%>" data-toggle="tab"></a></li>
+                    <% end %>
+                   </ul>
+               </div>
+               <% else %>
+                    <h4 style="margin-left: 41%;">No hay actividades próximas.</h4>
+               <% end %>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">        
+            <div class="footer-border"></div>
+            <div class="row">
+                <div class="copyright span5">
+                    <p>Copyright <%= Time.now.year %> Región San Pedro Sula. Template by <a href="http://azmind.com">Azmind</a>.</p>
+                </div>
+                <div class="social span7">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<div class="page-title">
+    <div class="row">
+    	<br/>
+    	<div class="contact-form span3"></div>        
+        <div class=" contact-us contact-form login-form span7">
+        	<br/>
+			<h2>
+				Información de <%= @user.name %>.
+			</h2>
+			<hr/>
+			<div class="margin-div">
+				<h5>
+					Correo: <span class="violet"><%= @user.email%></span>
+				</h5>
+				<% if puede "Ver Telefono" %>
+				<h5>
+					Teléfono: <span class="violet"><%= @user.phone%></span>
+				</h5>
+				<% end %>
+				<h5>
+					Capilla: <span class="violet">
+						<% if @user.chapel_id != nil %>
+							<%= Chapel.find(@user.chapel_id).name%>
+						<% else %>
+							No pertenece a alguna capilla en particular
+						<% end %>
+					</span>
+				</h5>				
+			</div>
+			<hr/>
+			<table>
+				<tr>
+					<% if puede "Ver Rol" %>
+					<td style="vertical-align:top;">
+						<div class="margin-div-user">
+							<h4>Roles</h4>
+							<hr/>
+							<% if @user.roles.any? %>
+							<ul>
+								<% @user.roles.each do |role| %>
+								<li><%= role.name %></li>
+								<% end %>
+							</ul>
+							<% else %>
+								<em>Aun no tiene roles asignados</em><br/>
+							<% end %>
+						</div>
+					</td>
+					<% end %>
+					<% if puede "Ver Grupo" %>
+					<td style="vertical-align:top;">
+						<div class="margin-div-user">
+							<h4>Grupos</h4>
+							<hr/>
+							<% if @user.groups.any? %>
+							<ul>
+								<% @user.groups.each do |group| %>
+								<li><%= group.name %></li>
+								<% end %>
+							</ul>
+							<% else %>
+								<em>Aun no tiene grupos asignados</em><br/>
+							<% end %>
+						</div>
+					</td>
+					<% end %>
+				</tr>
+			</table>
+			
+			
+			<br/>
+			<br/>
+		</div>
+	</div>
+</div>
+
+<div class="call-to-action-text ">
+	<div class="ca-button">	
+		<% if (puede("Eliminar Usuario")) && (@user.email != "nestor.bermudez@unitec.edu") && (current_user.email != @user.email)%>
+		<%= link_to 'Eliminar Usuario', admin_user_path(@user.id), :method => :delete, 
+		:data => { :confirm => '¿Seguro que desea eliminar este usuario?' } %>
+		<% end %>
+
+		<!-- TODO: agrupar usuarios!-->
+		<% if (puede "Asignar Grupo")  || (current_user.roles.where(:name => "Administrador").any?)  %>
+		<%= link_to 'Editar grupos', new_admin_user_group_path(@user.id) %>
+		<% end %>
+
+		<% if (puede "Asignar Rol") && @user.email != current_user.email%>
+	    <%= link_to 'Editar roles', new_admin_user_role_path(@user.id) %>
+		<% end %>	
+
+	    <% if current_user.id == @user.id %>
+	    <%= link_to 'Cambiar contraseña', edit_admin_user_path(@user.id) %>
+		<% end %>
+
+		<a href="<%= admin_users_path %>">Atrás</a>
+	</div>
+</div>

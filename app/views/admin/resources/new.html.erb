@@ -1,0 +1,53 @@
+<div class="page-title">
+    <div class="row">
+        <div class="contact-form span3"></div>
+        <div class=" contact-us contact-form login-form span7">
+            <h2>Nuevo recurso</h2>
+            <%= form_for [:admin, @resource], :html => {:multipart => true} do |f| %> 
+                <div class="name">
+                    <%= f.label :filename, 'Título', :class => 'nameLabel' %>
+                    <%= f.text_field :filename, :placeholder => 'Título...' %>
+                </div>
+                <div class="name">
+                    <%= f.label :position, 'Posición (Orden)', :class => 'nameLabel' %>
+                    <%= f.number_field :position, :placeholder => 'Si no se especifica se usará un número auto incremental...' %>
+                </div>
+                <div class"name">
+                    <label>Archivo*</label>
+                    <div class="FileUpload" id="FileUpload">
+                        <input type="file" size="24" class="BrowserHidden" id="BrowserHidden" onchange="getElementById('FileField').value = getElementById('BrowserHidden').value;" name="resource[file]"/>
+                        <div class="BrowserVisible" id="BrowserVisible">
+                            <input type="text" class="FileField" id="FileField" />
+                        </div>
+                    </div>
+                </div>
+                <div class"name">
+                    <%= f.label :url, 'o URL', :class => 'nameLabel' %>
+                    <%= f.text_field :url, :placeholder => 'URL de recurso existente...' %>
+                </div>
+                <div class="name">
+                    <%= f.label :description, 'Descripción', :class => 'nameLabel' %>
+                    <%= f.text_area :description, :placeholder => 'Descripción del recurso...' %>
+                </div>
+                <div class"name">
+                    <label>Vista previa*</label>
+                    <div class="FileUpload" id="FileUpload2">
+                        <input type="file" size="24" class="BrowserHidden" id="BrowserHidden2" onchange="getElementById('FileField2').value = getElementById('BrowserHidden2').value;" name="resource[thumbnail]"/>
+                        <div class="BrowserVisible">
+                            <input type="text" class="FileField" id="FileField2"/>
+                        </div>
+                    </div>
+                </div>
+                <br/><br/>
+                
+                <button type="submit" name="create">Subir recurso</button>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<div class="call-to-action-text ">
+    <div class="ca-button">
+        <a href="<%= admin_resources_path %>">Atrás</a>
+    </div>
+</div>

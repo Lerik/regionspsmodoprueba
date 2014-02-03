@@ -1,0 +1,37 @@
+<div class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <i class="icon-folder-open page-title-icon"></i>
+                <h2><%= @path_recursos %></h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="what-we-do container">
+	<div class="row">
+        <% if @tags.any? %>
+        <% @tags.each do |t| %>
+        <div class="service span3">
+            <div class="icon-awesome">
+                <i class="icon-folder-open"></i>
+            </div>
+            <h4><%= t.title %></h4>
+            <a href="<%= recursos_t_path(@category, t.id)%>">Ver recursos</a>
+        </div>
+        <% end %>	
+        <% else %>
+        <h2>Aún no hay recursos disponibles.</h2>
+        <h3>Por favor sea paciente, estamos trabajando en ello.</h3>
+        <% end %>	
+	</div>
+	<br/>
+	<br/>
+</div>
+
+
+<div class="call-to-action-text ">
+    <div class="ca-button">
+        <a href="<%= recursos_path %>">Atrás</a>
+    </div>
+</div>
